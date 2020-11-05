@@ -145,9 +145,7 @@ function create() {
     var hit = 0;
 
     /*colisões*/
-    //TODO ver um jeito de adicionar várias colisões de ma só vez
-    //this.physics.add.collider(tree, player);
-    this.physics.add.collider(player,treeFireMission,FireMission(this));
+    //this.physics.add.collider(player,treeFireMission,FireMission(this));
     this.physics.add.collider(player,treeFireMission);
     this.player = player;
 

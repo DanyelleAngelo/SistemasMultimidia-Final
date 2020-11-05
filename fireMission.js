@@ -12,7 +12,6 @@ function FireMission(game){
     };
     
     this.campfire.setActive(false).setVisible(false);
-
     collectingMaterial(this);
 }
 
@@ -20,13 +19,14 @@ function collectingMaterial(mission){
 
     step = mission.steps["collectingMaterial"];
     console.log(step["msg"]);
-    
+    var tree = this.tree;
     step["obj"].on('pointerdown', function() {
         if(mission.progress<step["goal"]){
             mission.progress +=mission.incrementProgress;
             console.log("Progress: " +mission.progress );
         }
         if(mission.progress == step["goal"]){
+            tree.setActive(false).setVisible(false);
             buildCampfire(mission);
         }
     });

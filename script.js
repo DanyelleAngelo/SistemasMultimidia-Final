@@ -32,7 +32,10 @@ function update() {
     var treeFireMission = this.treeFireMission;
 
     movements(this);
-
+ if (player.body.touching.right && treeFireMission.body.touching){
+     alert("oi");
+        FireMission(this);
+    }
    
     
 }

@@ -21,7 +21,7 @@ function FireMission(game){
 function collectingMaterial(mission){
     step = mission.steps["collectingMaterial"];
     console.log(step["msg"]);
-
+    
     step["obj"].on('pointerdown', function() {
         if(mission.progress<step["goal"]){
             mission.progress +=mission.incrementProgress;
@@ -35,7 +35,7 @@ function collectingMaterial(mission){
 
 function buildCampfire(mission){
         step = mission.steps["buildCampfire"];
-        this.campfire.setTexture('campfire',5);
+       
         this.campfire.setActive(true).setVisible(true);
         mission.game.physics.add.collider(mission.campfire, mission.game.player);
 

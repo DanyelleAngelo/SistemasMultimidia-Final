@@ -2,6 +2,7 @@ function preload() {
     this.load.image('tiles', 'assets/tilesets/gentle forest,jungle palette.png');
     this.load.image('trees','assets/tilesets/treeWall/treeWall.png');
     this.load.tilemapTiledJSON('forest','assets/tilesets/MapForest.json');
+    this.load.atlas("campfire","assets/campfire/campfire.png","assets/campfire/campfire.json");
 
     // inimigos
     this.load.image('aligato','assets/animals/Aligator.png');
@@ -73,7 +74,48 @@ function create() {
       framerate:3,
       repeat: 1,
     });
-
+    this.anims.create({
+          key: "brown-idle-down",
+          frames: [{ key: 'bear', frame: 'brown-down-1.png'}]
+      })
+      this.anims.create({
+          key: "brown-idle-up",
+          frames: [{ key: 'bear', frame: 'brown-up-1.png'}]
+      })
+      this.anims.create({
+          key: "brown-idle-left",
+          frames: [{ key: 'bear', frame: 'brown-left-1.png'}]
+      })
+      this.anims.create({
+          key: "brown-idle-right",
+          frames: [{ key: 'bear', frame: 'brown-right-1.png'}]
+      })
+      this.anims.create({
+         key: "brown-run-down",
+          frames: this.anims.generateFrameNames('bear', {start: 0, end: 2, prefix: "brown-down-", suffix: ".png"}),
+          repeat: -1,
+          frameRate: 10
+       });
+        this.anims.create({
+         key: "brown-run-up",
+          frames: this.anims.generateFrameNames('bear', {start: 0, end: 2, prefix: "brown-up-", suffix: ".png"}),
+          repeat: -1,
+          frameRate: 10
+       });
+        this.anims.create({
+         key: "brown-run-left",
+          frames: this.anims.generateFrameNames('bear', {start: 0, end: 2, prefix: "brown-left-", suffix: ".png"}),
+          repeat: -1,
+          frameRate: 10
+       });
+        this.anims.create({
+         key: "brown-run-right",
+          frames: this.anims.generateFrameNames('bear', {start: 0, end: 2, prefix: "brown-right-", suffix: ".png"}),
+          repeat: -1,
+          frameRate: 10
+       });
+      
+      const bear = this.physics.add.sprite(256,128,'bear','brown-up-1');
     //camera
     this.cameras.main.startFollow(player, true);
     this.cameras.main.setBounds(0,0,800,800);

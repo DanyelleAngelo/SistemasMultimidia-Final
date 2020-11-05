@@ -13,11 +13,11 @@ const config = {
             debug: true
         }
     },
-    scene: {
+    scene: [{
         preload: preload,
         create: create,
         update: update
-    },
+    }, GameOver],
     //scale: {
     //  zoom: 2
     //}
@@ -33,8 +33,7 @@ function update() {
 
     movements(this);
 
-    if (player.body.touching.left && treeFireMission.body.touching){
-        FireMission(this);
-    }
+   
+    
 }
 

@@ -13,12 +13,13 @@ function FireMission(game){
         "obj":this.campfire},
     };
     
-    //this.campfire.setActive(false).setVisible(false);
+    this.campfire.setActive(false).setVisible(false);
 
     collectingMaterial(this);
 }
 
 function collectingMaterial(mission){
+
     step = mission.steps["collectingMaterial"];
     console.log(step["msg"]);
     
@@ -51,5 +52,9 @@ function buildCampfire(mission){
                 console.log("Sucess");
             }
         });
-        this.campfire.setTexture('campfire',25);
+        //exemplo:
+        //const bear = this.physics.add.sprite(256,128,'bear','brown-down-1.png');
+
+        this.campfire.setTexture('campfire','campfire-30.png');
+        //this.physics.add.sprite(x,y,'campfire','campfire-20.png');
 }

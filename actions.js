@@ -19,4 +19,9 @@ function movements(game){
       game.player.setVelocityY(0);
       game.player.anims.play('stopped');
     }
+
+   // game.bear.anims.play("brown-run-down");
+   if (game.hit > 0){
+     return
+   }
 }

@@ -1,9 +1,7 @@
-//TODO problema na execução:funções não esperam o término das outras. ver async e wait 
-
 function FireMission(game){
     this.game = game;
     this.tree = game.treeFireMission; 
-    this.campfire = game.physics.add.sprite(config.width -200, config.height -120, 'campfire').setImmovable().setInteractive();
+    this.campfire = game.physics.add.sprite(config.width -200, config.height -120, 'campfire','campfire-32.png').setImmovable().setInteractive();
     this.goal = 100;
     this.incrementProgress = 5;
     this.progress = 0;
@@ -36,8 +34,9 @@ function collectingMaterial(mission){
 
 function buildCampfire(mission){
         step = mission.steps["buildCampfire"];
-       
-        this.campfire.setActive(true).setVisible(true);
+        console.log(step["msg"]);
+        var campfire = this.campfire;
+        campfire.setActive(true).setVisible(true);
         mission.game.physics.add.collider(mission.campfire, mission.game.player);
 
         //TODO corrigir Movimentos
@@ -48,13 +47,16 @@ function buildCampfire(mission){
                 console.log("Progress: " +mission.progress );
             }
             if(mission.progress == step["goal"]){
-                mission.campfire.setTexture('elements',15);
+                campfire.destroy();
+                mission.game.physics.add.sprite(config.width -200, config.height -120, 'campfire','campfire-19.png').setImmovable().setInteractive();
                 console.log("Sucess");
             }
         });
-        //exemplo:
-        //const bear = this.physics.add.sprite(256,128,'bear','brown-down-1.png');
 
-        this.campfire.setTexture('campfire','campfire-30.png');
+
+        //exemplo:
+       //this.campfire.setTexture('campfire-19.png');
+
+        //this.campfire.setTexture('campfire','campfire-30.png');
         //this.physics.add.sprite(x,y,'campfire','campfire-20.png');
 }

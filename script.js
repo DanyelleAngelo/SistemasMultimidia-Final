@@ -13,11 +13,11 @@ const config = {
             debug: true
         }
     },
-    scene: [{
+    scene: {
         preload: preload,
         create: create,
         update: update
-    }, GameOver],
+    },
     //scale: {
     //  zoom: 2
     //}

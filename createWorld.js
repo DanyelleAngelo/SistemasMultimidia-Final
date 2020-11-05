@@ -36,6 +36,22 @@ function create() {
     bear.body.setSize(bear.width*0.8, bear.height*0.95);
     bear.body.offset.x = 6;
     bear.body.offset.y = 4;
+
+    const bear1 = this.physics.add.sprite(600,200,'bear','brown-up-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
+    const bear2 = this.physics.add.sprite(300,600,'bear','black-down-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
+    const bear3 = this.physics.add.sprite(450,500,'bear','brown-left-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
     var player = this.physics.add.sprite(config.width / 2, config.height / 2, 'player');
     /*Movimentos do personagem*/
     this.anims.create({
@@ -141,16 +157,10 @@ function create() {
     this.physics.add.collider(player,groundLayer);
     this.physics.add.collider(bear,wallsLayer);
     this.physics.add.collider(bear,groundLayer);
-    this.physics.add.collider(bear,player, this.handlePlayerEnemyCollision, undefined, this);
+    this.physics.add.collider(bear,player);
+    this.physics.add.collider(bear1,player);
+    this.physics.add.collider(bear2,player);
+    this.physics.add.collider(bear3,player);
     //criaInimigo();
-    function handlePlayerEnemyCollision(obj1,obj2){
-      const dx = this.player.x - this.bear.x ;
-      const dy = this.player.y - this.bear.y ;
-
-      const dir = new Phaser.Math.Vector2(dx,dy).normalize().scale(200);
-
-      this.player.setVelocity(dir.x,dir.y);
-
-      this.hit = 1;
-    }
+    
 }

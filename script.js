@@ -17,7 +17,7 @@ const config = {
         preload: preload,
         create: create,
         update: update
-    },GameOver],
+    }, GameOver],
     //scale: {
     //  zoom: 2
     //}
@@ -31,7 +31,9 @@ function update() {
     var player = this.player;
     var treeFireMission = this.treeFireMission;
 
-    movements(this);  
-    //aproximaInimigo();   
+    movements(this);
+
+   
+    
 }
 

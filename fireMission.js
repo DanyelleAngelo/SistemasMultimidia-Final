@@ -3,7 +3,7 @@ function FireMission(game){
     this.game = game;
     this.player = game.player;
     this.tree = game.treeFireMission; 
-    this.campfire = game.physics.add.sprite(config.width -200, config.height -120, 'campfire','campfire-32.png').setImmovable().setInteractive();
+    this.campfire = game.physics.add.sprite(config.width -200, config.height -120, 'campfire','campfire-32.png').setImmovable().setInteractive().setScale(2.0);
     this.goal = 100;
     this.incrementProgress = 5;
     this.progress = 0;
@@ -36,9 +36,10 @@ function collectingMaterial(mission){
 
 function buildCampfire(mission){
         step = mission.steps["buildCampfire"];
-        alert(step["msg"]);
+        
         var campfire = this.campfire;
         campfire.setActive(true).setVisible(true);
+        alert(step["msg"]);
         mission.game.physics.add.collider(mission.campfire, mission.game.player);
 
         //TODO corrigir Movimentos

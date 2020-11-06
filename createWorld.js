@@ -4,7 +4,8 @@ function preload() {
     this.load.image('tiles', 'assets/tilesets/gentle forest,jungle palette.png');
     this.load.image('trees','assets/tilesets/treeWall/treeWall.png');
     this.load.tilemapTiledJSON('forest','assets/tilesets/MapForest.json');
-
+    this.load.image('gameOver','assets/Game-Over.png');
+    this.load.audio('musica_fundo', ['assets/audio/backgroundsound.mp3'])
     // inimigos
     this.load.image('aligato','assets/animals/Aligator.png');
      this.load.atlas("bear", "assets/inimigos/bear.png","assets/inimigos/bear.json");
@@ -21,6 +22,7 @@ function preload() {
 }
 
 function create() {
+    const world= this;
     /*fundo*/ 
     const map = this.make.tilemap({key:'forest'});
     const tileset1 = map.addTilesetImage('Forest', 'tiles');
@@ -30,12 +32,29 @@ function create() {
     groundLayer.setCollisionByProperty({ collides: true});
     wallsLayer.setCollisionByProperty({collides: true});
 
+    
     //var vida = this.physics.add.sprite(75,20,'vida','vidas.png').setScale(0.1);
 
     const bear = this.physics.add.sprite(256,128,'bear','brown-down-1.png').setScale(1.5).setImmovable();
     bear.body.setSize(bear.width*0.8, bear.height*0.95);
     bear.body.offset.x = 6;
     bear.body.offset.y = 4;
+
+    const bear1 = this.physics.add.sprite(600,200,'bear','brown-up-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
+    const bear2 = this.physics.add.sprite(300,600,'bear','black-down-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
+    const bear3 = this.physics.add.sprite(450,500,'bear','brown-left-1.png').setScale(1.5).setImmovable();
+    bear.body.setSize(bear.width*0.8, bear.height*0.95);
+    bear.body.offset.x = 6;
+    bear.body.offset.y = 4;
+
     var player = this.physics.add.sprite(config.width / 2, config.height / 2, 'player');
     /*Movimentos do personagem*/
     this.anims.create({
@@ -127,12 +146,13 @@ function create() {
     this.treeFireMission = treeFireMission;
 
     var hit = 0;
-
+    
     /*colisões*/
-    //TODO ver um jeito de adicionar várias colisões de ma só vez
-    //this.physics.add.collider(tree, player);
-    this.physics.add.collider(player,treeFireMission,FireMission(this));
-    this.physics.add.collider(player,treeFireMission);
+    this.physics.add.collider(player,treeFireMission,function(){
+        if (treeFireMission.body.touching){
+            FireMission(world); 
+        }
+    });
     this.player = player;
 
     inimigos = this.physics.add.group();
@@ -141,16 +161,17 @@ function create() {
     this.physics.add.collider(player,groundLayer);
     this.physics.add.collider(bear,wallsLayer);
     this.physics.add.collider(bear,groundLayer);
-    this.physics.add.collider(bear,player, this.handlePlayerEnemyCollision, undefined, this);
+    this.physics.add.collider(bear,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear1,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear2,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear3,player,encostouInimigo,null,this);
+
+   const backgroundSound = this.sound.add('musica_fundo'); 
+    backgroundSound.setLoop(true);
+    backgroundSound.play();
+    backgroundSound.setVolume(0.050);
     //criaInimigo();
-    function handlePlayerEnemyCollision(obj1,obj2){
-      const dx = this.player.x - this.bear.x ;
-      const dy = this.player.y - this.bear.y ;
-
-      const dir = new Phaser.Math.Vector2(dx,dy).normalize().scale(200);
-
-      this.player.setVelocity(dir.x,dir.y);
-
-      this.hit = 1;
-    }
+    alert("Hola sobrevivente, precisamos encontrar um meio para sobreviver nessa fria floresta, para isso, precisamos construir uma fogueira, procure na floresta pela árvore perfeita, cuidado com os ursos! Um toque deles e tchau!!");
+    
 }
+

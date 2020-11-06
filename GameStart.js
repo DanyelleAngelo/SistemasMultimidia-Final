@@ -40,7 +40,11 @@ class GameStart extends Phaser.Scene
   backgroundSound.play()
   backgroundSound.setVolume(0.050);
 
-  this.input.keyboard.once('keydown_SPACE', () => {this.scene.start()})
+  this.input.keyboard.once('keydown_SPACE', () => {this.scene.start({
+        preload: preload,
+        create: create,
+        update: update
+    })});
 
  }
  }

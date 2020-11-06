@@ -174,3 +174,4 @@ function create() {
     alert("Hola sobrevivente, precisamos encontrar um meio para sobreviver nessa fria floresta, para isso, precisamos construir uma fogueira, procure na floresta pela árvore perfeita, cuidado com os ursos! Um toque deles e tchau!!");
     
 }
+

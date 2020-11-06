@@ -4,7 +4,8 @@ function preload() {
     this.load.image('tiles', 'assets/tilesets/gentle forest,jungle palette.png');
     this.load.image('trees','assets/tilesets/treeWall/treeWall.png');
     this.load.tilemapTiledJSON('forest','assets/tilesets/MapForest.json');
-
+    this.load.image('gameOver','assets/Game-Over.png');
+    this.load.audio('musica_fundo', ['assets/audio/backgroundsound.mp3'])
     // inimigos
     this.load.image('aligato','assets/animals/Aligator.png');
      this.load.atlas("bear", "assets/inimigos/bear.png","assets/inimigos/bear.json");
@@ -21,6 +22,7 @@ function preload() {
 }
 
 function create() {
+    const world= this;
     /*fundo*/ 
     const map = this.make.tilemap({key:'forest'});
     const tileset1 = map.addTilesetImage('Forest', 'tiles');
@@ -30,6 +32,7 @@ function create() {
     groundLayer.setCollisionByProperty({ collides: true});
     wallsLayer.setCollisionByProperty({collides: true});
 
+    
     //var vida = this.physics.add.sprite(75,20,'vida','vidas.png').setScale(0.1);
 
     const bear = this.physics.add.sprite(256,128,'bear','brown-down-1.png').setScale(1.5).setImmovable();
@@ -143,10 +146,13 @@ function create() {
     this.treeFireMission = treeFireMission;
 
     var hit = 0;
-
+    
     /*colisões*/
-    //this.physics.add.collider(player,treeFireMission,FireMission(this));
-    this.physics.add.collider(player,treeFireMission);
+    this.physics.add.collider(player,treeFireMission,function(){
+        if (treeFireMission.body.touching){
+            FireMission(world); 
+        }
+    });
     this.player = player;
 
     inimigos = this.physics.add.group();
@@ -155,10 +161,16 @@ function create() {
     this.physics.add.collider(player,groundLayer);
     this.physics.add.collider(bear,wallsLayer);
     this.physics.add.collider(bear,groundLayer);
-    this.physics.add.collider(bear,player);
-    this.physics.add.collider(bear1,player);
-    this.physics.add.collider(bear2,player);
-    this.physics.add.collider(bear3,player);
+    this.physics.add.collider(bear,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear1,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear2,player,encostouInimigo,null,this);
+    this.physics.add.collider(bear3,player,encostouInimigo,null,this);
+
+   const backgroundSound = this.sound.add('musica_fundo'); 
+    backgroundSound.setLoop(true);
+    backgroundSound.play();
+    backgroundSound.setVolume(0.050);
     //criaInimigo();
+    alert("Hola sobrevivente, precisamos encontrar um meio para sobreviver nessa fria floresta, para isso, precisamos construir uma fogueira, procure na floresta pela árvore perfeita, cuidado com os ursos! Um toque deles e tchau!!");
     
 }

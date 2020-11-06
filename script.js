@@ -31,6 +31,7 @@ function update() {
     var player = this.player;
     var treeFireMission = this.treeFireMission;
 
-    movements(this);    
+    movements(this);  
+    //aproximaInimigo();   
 }
 
